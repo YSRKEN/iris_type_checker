@@ -69,6 +69,13 @@ const App: React.FC = () => {
           <h3 className="d-inline d-sm-none">あいミス属性チェッカー</h3>
         </Col>
       </Row>
+      <Row>
+        <Col className="text-center">
+          <span className="d-inline-block mr-3">Ver.1.0.0</span>
+          <span className="d-inline-block mr-3"><a href="https://github.com/YSRKEN/iris_type_checker" rel="noreferrer" target="_blank">GitHub</a> </span>
+          <span><a href="https://twitter.com/YSRKEN" rel="noreferrer" target="_blank">作者のTwitter</a></span>
+        </Col>
+      </Row>
       <Row className="my-3">
         <Col className="text-center">
           <Form>
