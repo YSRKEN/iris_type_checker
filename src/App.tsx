@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const [typeStatusList, setTypeStatusList] = useState<boolean[]>([false, false, false, false, false]);
   const [attackTypeStatusList, setAttackTypeStatusList] = useState<boolean[]>([false, false, false, false, false]);
   const [defenceTypeStatusList, setDefenceTypeStatusList] = useState<boolean[]>([true, true, true, true, true]);
+  const [betterTypeStatusList, setBetterTypeStatusList] = useState<boolean[]>([false, false, false, false, false]);
 
   useEffect(() => {
     const newAttackTypeStatusList = [false, false, false, false, false];
@@ -34,6 +35,14 @@ const App: React.FC = () => {
     }
     setDefenceTypeStatusList(newDefenceTypeStatusList);
   }, [typeStatusList]);
+
+  useEffect(() => {
+    const newBetterTypeStatusList = [true, true, true, true, true];
+    for (let i = 0; i < 5; i += 1) {
+      newBetterTypeStatusList[i] = attackTypeStatusList[i] && defenceTypeStatusList[i];
+    }
+    setBetterTypeStatusList(newBetterTypeStatusList);
+  }, [attackTypeStatusList, defenceTypeStatusList]);
 
   const flipTypeStatus = (index: number) => {
     const newList = [...typeStatusList];
@@ -75,6 +84,10 @@ const App: React.FC = () => {
               <Form.Label>弱点を突かれない属性</Form.Label>
             </Form.Group>
             <TypeListView typeStatusList={defenceTypeStatusList} />
+            <Form.Group>
+              <Form.Label>推奨される属性</Form.Label>
+            </Form.Group>
+            <TypeListView typeStatusList={betterTypeStatusList} />
           </Form>
         </Col>
       </Row>
