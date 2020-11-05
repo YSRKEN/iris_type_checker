@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import 'App.css';
 
 const TypeListView: React.FC<{ typeStatusList: boolean[] }> = ({ typeStatusList }) => (
   <Form.Group>
@@ -7,7 +8,7 @@ const TypeListView: React.FC<{ typeStatusList: boolean[] }> = ({ typeStatusList 
     {typeStatusList[1] && <Button variant="success" className="mr-3" size="lg">芸</Button>}
     {typeStatusList[2] && <Button variant="primary" className="mr-3" size="lg">知</Button>}
     {typeStatusList[3] && <Button variant="warning" className="mr-3" size="lg">理</Button>}
-    {typeStatusList[4] && <Button variant="secondary" size="lg">心</Button>}
+    {typeStatusList[4] && <button type="button" className="btn btn-lg btn-purple">心</button>}
     {typeStatusList.filter(c => c).length === 0 && <Button variant="outline-secondary" size="lg">選択なし</Button>}
   </Form.Group>
 );
@@ -61,6 +62,9 @@ const App: React.FC = () => {
         <Col className="text-center">
           <Form>
             <Form.Group>
+              <Form.Label><strong>敵の属性を選択：</strong></Form.Label>
+            </Form.Group>
+            <Form.Group>
               <Button variant={typeStatusList[0] ? "danger" : "outline-danger"} className="mr-3" size="lg"
                 onClick={() => flipTypeStatus(0)}>力</Button>
               <Button variant={typeStatusList[1] ? "success" : "outline-success"} className="mr-3" size="lg"
@@ -69,23 +73,23 @@ const App: React.FC = () => {
                 onClick={() => flipTypeStatus(2)}>知</Button>
               <Button variant={typeStatusList[3] ? "warning" : "outline-warning"} className="mr-3" size="lg"
                 onClick={() => flipTypeStatus(3)}>理</Button>
-              <Button variant={typeStatusList[4] ? "secondary" : "outline-secondary"} size="lg"
-                onClick={() => flipTypeStatus(4)}>心</Button>
+              <button type="button" className={typeStatusList[4] ? "btn btn-lg btn-purple" : "btn btn-lg btn-outline-purple"}
+                onClick={() => flipTypeStatus(4)}>心</button>
             </Form.Group>
-            <Form.Group>
-              <Form.Label>選択された属性</Form.Label>
+            <Form.Group className="mt-5">
+              <Form.Label><strong>選択された属性：</strong></Form.Label>
             </Form.Group>
             <TypeListView typeStatusList={typeStatusList} />
-            <Form.Group>
-              <Form.Label>弱点を突ける属性</Form.Label>
+            <Form.Group className="mt-5">
+              <Form.Label><strong>弱点を突ける属性：</strong></Form.Label>
             </Form.Group>
             <TypeListView typeStatusList={attackTypeStatusList} />
-            <Form.Group>
-              <Form.Label>弱点を突かれない属性</Form.Label>
+            <Form.Group className="mt-5">
+              <Form.Label><strong>弱点を突かれない属性：</strong></Form.Label>
             </Form.Group>
             <TypeListView typeStatusList={defenceTypeStatusList} />
-            <Form.Group>
-              <Form.Label>推奨される属性</Form.Label>
+            <Form.Group className="mt-5">
+              <Form.Label><strong>推奨される属性：</strong></Form.Label>
             </Form.Group>
             <TypeListView typeStatusList={betterTypeStatusList} />
           </Form>

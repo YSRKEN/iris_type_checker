@@ -1,0 +1,11 @@
+button.btn.btn-purple {
+  background-color: #660066 !important;
+  color: #FFFFFF !important;
+  border-color: #660066 !important;
+}
+
+button.btn.btn-outline-purple {
+  background-color: #FFFFFF !important;
+  color: #660066 !important;
+  border-color: #660066 !important;
+}
