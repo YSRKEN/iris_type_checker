@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
 const TypeListView: React.FC<{ typeStatusList: boolean[] }> = ({ typeStatusList }) => (
@@ -14,6 +14,26 @@ const TypeListView: React.FC<{ typeStatusList: boolean[] }> = ({ typeStatusList 
 
 const App: React.FC = () => {
   const [typeStatusList, setTypeStatusList] = useState<boolean[]>([false, false, false, false, false]);
+  const [attackTypeStatusList, setAttackTypeStatusList] = useState<boolean[]>([false, false, false, false, false]);
+  const [defenceTypeStatusList, setDefenceTypeStatusList] = useState<boolean[]>([true, true, true, true, true]);
+
+  useEffect(() => {
+    const newAttackTypeStatusList = [false, false, false, false, false];
+    for (let i = 0; i < 5; i += 1) {
+      newAttackTypeStatusList[i] = typeStatusList[(i + 1) % 5];
+    }
+    setAttackTypeStatusList(newAttackTypeStatusList);
+  }, [typeStatusList]);
+
+  useEffect(() => {
+    const newDefenceTypeStatusList = [true, true, true, true, true];
+    for (let i = 0; i < 5; i += 1) {
+      if (typeStatusList[i]) {
+        newDefenceTypeStatusList[(i + 1) % 5] = false;
+      }
+    }
+    setDefenceTypeStatusList(newDefenceTypeStatusList);
+  }, [typeStatusList]);
 
   const flipTypeStatus = (index: number) => {
     const newList = [...typeStatusList];
@@ -50,6 +70,11 @@ const App: React.FC = () => {
             <Form.Group>
               <Form.Label>弱点を突ける属性</Form.Label>
             </Form.Group>
+            <TypeListView typeStatusList={attackTypeStatusList} />
+            <Form.Group>
+              <Form.Label>弱点を突かれない属性</Form.Label>
+            </Form.Group>
+            <TypeListView typeStatusList={defenceTypeStatusList} />
           </Form>
         </Col>
       </Row>
