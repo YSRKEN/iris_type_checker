@@ -3,14 +3,24 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import 'App.css';
 
 const TypeListView: React.FC<{ typeStatusList: boolean[] }> = ({ typeStatusList }) => (
-  <Form.Group>
-    {typeStatusList[0] && <Button variant="danger" className="mr-3" size="lg">力</Button>}
-    {typeStatusList[1] && <Button variant="success" className="mr-3" size="lg">芸</Button>}
-    {typeStatusList[2] && <Button variant="primary" className="mr-3" size="lg">知</Button>}
-    {typeStatusList[3] && <Button variant="warning" className="mr-3" size="lg">理</Button>}
-    {typeStatusList[4] && <button type="button" className="btn btn-lg btn-purple">心</button>}
-    {typeStatusList.filter(c => c).length === 0 && <Button variant="outline-secondary" size="lg">選択なし</Button>}
-  </Form.Group>
+  <>
+    <Form.Group className="d-none d-sm-block">
+      {typeStatusList[0] && <Button variant="danger" className="mr-3" size="lg">力</Button>}
+      {typeStatusList[1] && <Button variant="success" className="mr-3" size="lg">芸</Button>}
+      {typeStatusList[2] && <Button variant="primary" className="mr-3" size="lg">知</Button>}
+      {typeStatusList[3] && <Button variant="warning" className="mr-3" size="lg">理</Button>}
+      {typeStatusList[4] && <button type="button" className="btn btn-lg btn-purple">心</button>}
+      {typeStatusList.filter(c => c).length === 0 && <Button variant="outline-secondary" size="lg">なし</Button>}
+    </Form.Group>
+    <Form.Group className="d-block d-sm-none">
+      {typeStatusList[0] && <Button variant="danger" className="mr-3">力</Button>}
+      {typeStatusList[1] && <Button variant="success" className="mr-3">芸</Button>}
+      {typeStatusList[2] && <Button variant="primary" className="mr-3">知</Button>}
+      {typeStatusList[3] && <Button variant="warning" className="mr-3">理</Button>}
+      {typeStatusList[4] && <button type="button" className="btn btn-purple">心</button>}
+      {typeStatusList.filter(c => c).length === 0 && <Button variant="outline-secondary" size="lg">なし</Button>}
+    </Form.Group>
+  </>
 );
 
 const App: React.FC = () => {
@@ -55,7 +65,8 @@ const App: React.FC = () => {
     <Container>
       <Row className="my-3">
         <Col className="text-center">
-          <h1>あいミス属性チェッカー</h1>
+          <h1 className="d-none d-sm-inline">あいミス属性チェッカー</h1>
+          <h3 className="d-inline d-sm-none">あいミス属性チェッカー</h3>
         </Col>
       </Row>
       <Row className="my-3">
@@ -64,7 +75,7 @@ const App: React.FC = () => {
             <Form.Group>
               <Form.Label><strong>敵の属性を選択：</strong></Form.Label>
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="d-none d-sm-block">
               <Button variant={typeStatusList[0] ? "danger" : "outline-danger"} className="mr-3" size="lg"
                 onClick={() => flipTypeStatus(0)}>力</Button>
               <Button variant={typeStatusList[1] ? "success" : "outline-success"} className="mr-3" size="lg"
@@ -74,6 +85,18 @@ const App: React.FC = () => {
               <Button variant={typeStatusList[3] ? "warning" : "outline-warning"} className="mr-3" size="lg"
                 onClick={() => flipTypeStatus(3)}>理</Button>
               <button type="button" className={typeStatusList[4] ? "btn btn-lg btn-purple" : "btn btn-lg btn-outline-purple"}
+                onClick={() => flipTypeStatus(4)}>心</button>
+            </Form.Group>
+            <Form.Group className="d-block d-sm-none">
+              <Button variant={typeStatusList[0] ? "danger" : "outline-danger"} className="mr-3"
+                onClick={() => flipTypeStatus(0)}>力</Button>
+              <Button variant={typeStatusList[1] ? "success" : "outline-success"} className="mr-3"
+                onClick={() => flipTypeStatus(1)}>芸</Button>
+              <Button variant={typeStatusList[2] ? "primary" : "outline-primary"} className="mr-3"
+                onClick={() => flipTypeStatus(2)}>知</Button>
+              <Button variant={typeStatusList[3] ? "warning" : "outline-warning"} className="mr-3"
+                onClick={() => flipTypeStatus(3)}>理</Button>
+              <button type="button" className={typeStatusList[4] ? "btn btn-purple" : "btn btn-outline-purple"}
                 onClick={() => flipTypeStatus(4)}>心</button>
             </Form.Group>
             <Form.Group className="mt-5">
