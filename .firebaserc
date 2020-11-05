@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "zwsptools"
+  },
+  "targets": {
+    "zwsptools": {
+      "hosting": {
+        "iris-type-checker": [
+          "iris-type-checker"
+        ]
+      }
+    }
+  }
+}
