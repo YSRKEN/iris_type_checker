@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
+const TypeListView: React.FC<{ typeStatusList: boolean[] }> = ({ typeStatusList }) => (
+  <Form.Group>
+    {typeStatusList[0] && <Button variant="danger" className="mr-3" size="lg">力</Button>}
+    {typeStatusList[1] && <Button variant="success" className="mr-3" size="lg">芸</Button>}
+    {typeStatusList[2] && <Button variant="primary" className="mr-3" size="lg">知</Button>}
+    {typeStatusList[3] && <Button variant="warning" className="mr-3" size="lg">理</Button>}
+    {typeStatusList[4] && <Button variant="secondary" size="lg">心</Button>}
+    {typeStatusList.filter(c => c).length === 0 && <Button variant="outline-secondary" size="lg">選択なし</Button>}
+  </Form.Group>
+);
+
 const App: React.FC = () => {
   const [typeStatusList, setTypeStatusList] = useState<boolean[]>([false, false, false, false, false]);
 
@@ -31,6 +42,13 @@ const App: React.FC = () => {
                 onClick={() => flipTypeStatus(3)}>理</Button>
               <Button variant={typeStatusList[4] ? "secondary" : "outline-secondary"} size="lg"
                 onClick={() => flipTypeStatus(4)}>心</Button>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>選択された属性</Form.Label>
+            </Form.Group>
+            <TypeListView typeStatusList={typeStatusList} />
+            <Form.Group>
+              <Form.Label>弱点を突ける属性</Form.Label>
             </Form.Group>
           </Form>
         </Col>
